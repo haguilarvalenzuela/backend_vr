@@ -1,13 +1,13 @@
 import os
 import tempfile
 
-#import pytest
+import pytest
 
 from flaskr import api
 from models.profesor import Profesor
 
 
-#@pytest.fixture
+@pytest.fixture
 def client():
     db_fd, api.app.config['DATABASE'] = tempfile.mkstemp()
     api.app.config['TESTING'] = True
