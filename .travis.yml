@@ -3,6 +3,3 @@ python:
   - "3.5"
 script:
   - pytest
-before_install:
-  - sudo apt-get install python-logilab-common
-  - pip install pytest
