@@ -1,3 +1,4 @@
 languaje: python
 script:
+  - sudo apt-get install python-logilab-common
   - pytest
