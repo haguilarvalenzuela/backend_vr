@@ -3,6 +3,6 @@ python:
   - "3.5"
 cache: pip
 script:
-  - "apt-get install python-pip"
-  - "pip3 install pytest"
+  - "sudo apt-get install python-pip"
+  - "pip install pytest"
   - "pytest"
