@@ -2,4 +2,6 @@ languaje: python
 python:
   - "3.5"
 cache: pip
-script: pytest
+script:
+  - "pip install pytest"
+  - "pytest"
