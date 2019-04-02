@@ -6,6 +6,6 @@ install:
   - sudo pip install .
 script:
   - sudo apt-get install -y python-logilab-common
-  - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr/flaskr
+  - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr
   - export FLASK_ENV=development
   - pytest
