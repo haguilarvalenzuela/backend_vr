@@ -16,7 +16,7 @@ app.register_blueprint(api_bp)
 
 
 def init_modules(app, api):
-    from resources import curso
+    from resources.curso import curso
     from resources import alumno
     from resources import institucion
     from resources import asignatura
