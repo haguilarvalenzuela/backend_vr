@@ -1,9 +1,9 @@
 import os
 import tempfile
 
-import pytest
+#import pytest
 
-#from flaskr import api
+from flaskr import api
 from models.profesor import Profesor
 
 
