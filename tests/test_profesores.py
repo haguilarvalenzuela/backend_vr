@@ -3,8 +3,8 @@ import tempfile
 
 import pytest
 
-#from flaskr import api
-from api import api
+from flaskr import api
+#from api import api
 from models.profesor import Profesor
 
 
@@ -19,10 +19,10 @@ def client():
     os.close(db_fd)
     os.unlink(api.app.config['DATABASE'])
 
-# def test_get_profesores(client):
+def test_get_profesores(client):
 
-#     rv = client.get('/profesores')
-#     assert rv.data
+    rv = client.get('/profesores')
+    assert rv.data
 
 # def test_get_profesor_id(client):
 
