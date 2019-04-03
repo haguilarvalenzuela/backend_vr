@@ -12,9 +12,6 @@ import json
 def init_module(api):
     api.add_resource(AdministradorItem, '/administradores/<id>')
     api.add_resource(Administradores, '/administradores')
-    api.add_resource(DataChartDoug, '/data_chart_doug/<institucionId>')
-    api.add_resource(DataCharBar, '/data_chart_bar/<institucionId>' )
-
 
 
 class AdministradorItem(Resource):
