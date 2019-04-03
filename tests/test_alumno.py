@@ -67,4 +67,14 @@ def test_post_alumno(client):
     rv = client.post('/alumnos', data=data)
     assert rv.data
 
-#
+#Implementar
+
+"""
+AlumnosCurso POST
+
+AlumnoItem PUT
+
+AlumnoItem DELETE
+
+AlumnoCurso DELETE
+"""
