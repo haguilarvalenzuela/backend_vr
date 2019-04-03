@@ -15,4 +15,4 @@ script:
   - mongorestore /home/travis/build/haguilarvalenzuela/backend_vr/db_backup
   - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr
   - export FLASK_ENV=development
-  - pytest
+  - pytest -v
