@@ -2,7 +2,6 @@ from flask import Flask, Blueprint
 from flask_restful import reqparse, abort, Api, Resource
 from flask_cors import CORS
 from flask_login import LoginManager
-from db import db
 import json
 import os
 
