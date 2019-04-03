@@ -51,3 +51,20 @@ def test_post_profesor(client):
     rv = client.post('/profesores', data=data)
     assert rv.data
 
+def test_put_profesor(client):
+
+    data = {
+        'nombres':'nombre prueba',
+        'apellido_paterno':'paterno',
+        'apellido_materno':'materno',
+        'telefono':'+569',
+        'email':'prueba@prueba.prueba',
+        'nombre_usuario':'usuario_prueba',
+        'password':'password',
+        'current_password':'asd'
+        }
+    profesor = Profesor.objects().first()
+
+    data = json.dumps(data)
+    data = data.encode()
+    rv = client.put('/profesores/'+str(profesor.id), data=data)
