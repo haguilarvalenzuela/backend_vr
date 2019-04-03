@@ -66,3 +66,5 @@ def test_post_alumno(client):
     data = data.encode()
     rv = client.post('/alumnos', data=data)
     assert rv.data
+
+#

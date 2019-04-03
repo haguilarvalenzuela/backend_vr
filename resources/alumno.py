@@ -9,7 +9,6 @@ import json
 def init_module(api):
     api.add_resource(AlumnoItem, '/alumnos/<id>')
     api.add_resource(Alumnos, '/alumnos')
-    api.add_resource(AlumnosColegio, '/alumnos_colegio/<id_institucion>')
     api.add_resource(AlumnoCursos, '/alumno_cursos/<id>')
     api.add_resource(AlumnosCurso, '/alumnos_curso/<id_curso>')
     api.add_resource(AlumnoCurso, '/alumno_curso/<id_curso>/<id_alumno>')
