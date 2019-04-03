@@ -21,3 +21,10 @@ def test_get_administradores(client):
 
 	rv = client.get('/administradores')
 	assert rv.data
+
+def test_get_administrador(client):
+
+	administrador = Administrador.objects().first()
+	assert print(administrador)
+	# rv = client.get('/administradores/'+str(administrador.id))
+	# assert rv.data
