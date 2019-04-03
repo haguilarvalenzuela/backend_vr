@@ -58,6 +58,6 @@ class Profesores(Resource):
         profesor.telefono = data['telefono']
         profesor.email = data['email']
         profesor.nombre_usuario = data['nombre_usuario']
-        profesor.password = data['password']
+        profesor.encrypt_password(data['password'])
         profesor.save()
         return {'Response': 'exito'}

@@ -1,6 +1,6 @@
 import os
 import tempfile
-
+import json
 import pytest
 
 from flaskr import api
@@ -27,3 +27,27 @@ def test_get_profesor_id(client):
 	profesor = Profesor.objects().first()
 	rv = client.get('/profesores/'+str(profesor.id))
 	assert rv.data
+
+def test_get_profesor_cursos(client):
+
+    profesor = Profesor.objects().first()
+    rv = client.get('/profesor_curso/'+str(profesor.id))
+    assert rv.data
+
+def test_post_profesor(client):
+
+    data = {
+        'nombres':'nombre prueba',
+        'apellido_paterno':'paterno',
+        'apellido_materno':'materno',
+        'telefono':'+569',
+        'email':'prueba@prueba.prueba',
+        'nombre_usuario':'usuario_prueba',
+        'password':'password'
+        }
+
+    data = json.dumps(data)
+    data = data.encode()
+    rv = client.post('/profesores', data=data)
+    assert rv.data
+
