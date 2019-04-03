@@ -22,8 +22,8 @@ def test_get_profesores(client):
     rv = client.get('/profesores')
     assert rv.data
 
-# def test_get_profesor_id(client):
+def test_get_profesor_id(client):
 
-# 	profesor = Profesor.objects().first()
-# 	rv = client.get('/profesores/'+str(profesor.id))
-# 	assert rv.data
+	profesor = Profesor.objects().first()
+	rv = client.get('/profesores/'+str(profesor.id))
+	assert rv.data
