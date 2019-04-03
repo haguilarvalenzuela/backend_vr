@@ -34,3 +34,9 @@ def test_get_alumnos_curso(client):
     curso = Curso.objects().first()
     rv = client.get('/alumnos_curso/'+str(curso.id))
     assert rv.data
+
+def test_get_alumno_cursos(client):
+
+    alumno = Alumno.objects().first()
+    rv = client.get('/alumno_cursos/'+str(alumno.id))
+    assert rv.data
