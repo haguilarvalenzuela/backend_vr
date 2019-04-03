@@ -40,3 +40,29 @@ def test_get_alumno_cursos(client):
     alumno = Alumno.objects().first()
     rv = client.get('/alumno_cursos/'+str(alumno.id))
     assert rv.data
+
+def test_post_alumno(client):
+
+    data_personal = {
+        'nombres':'nombre prueba',
+        'apellido_paterno':'paterno',
+        'apellido_materno':'materno',
+        'email':'email@email.email',
+        'telefono':'+569'
+    }
+
+    data_academico = {
+        'nombre_usuario':'usuario_prueba',
+        'password':'asd',
+        'matricula':'matricula'
+    }
+
+    data = {
+        'data_personal':data_personal,
+        'data_academico':data_academico
+    }
+
+    data = json.dumps(data)
+    data = data.encode()
+    rv = client.post('/alumnos', data=data)
+    assert rv.data
