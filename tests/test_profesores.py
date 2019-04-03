@@ -68,3 +68,10 @@ def test_put_profesor(client):
     data = json.dumps(data)
     data = data.encode()
     rv = client.put('/profesores/'+str(profesor.id), data=data)
+    assert rv.data
+
+def test_delete_profesor(client):
+
+    profesor = Profesor.objects().first()
+    rv = client.delete('/profesores/'+str(profesor.id))
+    assert rv.data
