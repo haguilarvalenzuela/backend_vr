@@ -3,8 +3,8 @@ import tempfile
 
 import pytest
 
-#from flaskr import api
-from api import api
+from flaskr import api
+#from api import api
 from models.profesor import Profesor
 
 
