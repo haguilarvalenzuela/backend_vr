@@ -5,6 +5,7 @@ import pytest
 
 from flaskr import api
 from models.asignatura import Asignatura
+from models.institucion import Institucion
 
 @pytest.fixture
 def client():
@@ -28,3 +29,28 @@ def test_get_asignatura(client):
 def test_get_asignaturas(client):
 	rv = client.get('/asignaturas')
 	assert True
+
+def test_post_asignatura(client):
+	institucion = Institucion.objects().first()
+	if(institucion==None):
+		assert True
+	else:
+		data = {
+			'nombre': 'nombre',
+			'institucion': str(institucion.id)
+		}
+		rv = client.post('/asignaturas', data=data)
+		assert True
+
+def test_put_asignatura(client):
+	asignatura = Asignatura.objects().first()
+	institucion = Institucion.objects().first()
+	if(asignatura==None):
+		assert True
+	else:
+		data = {
+			'nombre': 'nombre',
+			'institucion': str(institucion.id)
+		}
+		rv = client.put('/asignaturas/'+str(asignatura.id), data=data)
+		assert True
