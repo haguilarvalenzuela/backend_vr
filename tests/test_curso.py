@@ -100,9 +100,56 @@ def test_post_curso(client):
 			'curso_base': str(curso_base.id),
 			'descripcion': 'descripcion del curso'
 		}
-
+		data = json.dumps(data)
+		data = data.encode(data)
 		rv = client.post('/cursos', data=data)
 		assert True
 
+def test_put_curso_detalle(client):
+	curso = Curso.objects().first()
+	if(curso==None):
+		assert True
+	else:
+		data = {
+			'codigo_curso': str(curso.id),
+			'nombre': 'nombre',
+			'descripcion': 'descripcion'
+		}
+		data = json.dumps(data)
+		data = data.encode(data)
+		rv = client.put('/curso_detalle_put')
+		assert True
 
+def test_put_curso(client):
+	curso = Curso.objects().first()
+	institucion = Institucion.objects().first()
+	asignatura = Asignatura.objects().first()
+	profesor = Profesor.objects().first()
+	alumno = Alumno.objects().first()
+	grado = Grado.objects().first()
+	curso_base = CursoBase.objects().first()
 
+	if((institucion==None) or (asignatura==None) or (profesor==None) or (alumnos==None) or (grado==None) or (curso_base==None) or (curso==None)):
+		assert True
+	else:
+		data = {
+			'nombre': 'nombre',
+			'fecha_creacion': '01/01/2000',
+			'preguntas': [],
+			'asignatura': str(asignatura.id),
+			'institucion': str(institucion.id),
+			'profesor': str(profesor.id),
+			'alumnos': alumnos_array,
+			'grado': str(grado.id),
+			'activo': True,
+			'version': '1.0',
+			'curso_base': str(curso_base.id),
+			'descripcion': 'descripcion del curso'
+		}
+
+		data_put = {
+			'id': str(curso.id),
+			'data': data
+		}
+		rv = client.put('/cursos', data=data)
+		assert True
