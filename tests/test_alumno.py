@@ -110,12 +110,22 @@ def test_put_alumno(client):
         rv = client.put('/alumnos/'+str(alumno.id), data=data)
         assert True
 
+def test_delete_alumno(client):
 
-#Implementar
+    alumno = Alumno.objects().first()
+    if(alumno==None):
+        assert True
+    else:
+        rv = client.delete('/alumnos/'+str(alumno.id))
+        assert True
 
-"""
+def test_delete_alumno_curso(client):
 
-AlumnoItem DELETE
+    alumno = Alumno.objects().first()
+    curso = Curso.objects().first()
 
-AlumnoCurso DELETE
-"""
+    if((alumno==None) or (curso==None)):
+        assert True
+    else:
+        rv = client.delete('/alumno_curso/'+str(curso.id)+'/'+str(alumno.id))
+        assert True
