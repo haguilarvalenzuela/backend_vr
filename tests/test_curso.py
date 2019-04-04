@@ -6,6 +6,11 @@ import pytest
 from flaskr import api
 from models.curso import Curso
 from models.curso_base import CursoBase
+from models.institucion import Institucion
+from models.asignatura import Asignatura
+from models.profesor import Profesor
+from models.alumno import Alumno
+from models.grado import Grado
 
 @pytest.fixture
 def client():
@@ -66,3 +71,38 @@ def test_get_curso_base(client):
 def test_get_curso_alumnos(client):
 	rv = client.get('/cursos_alumnos')
 	assert True
+
+def test_post_curso(client):
+	institucion = Institucion.objects().first()
+	asignatura = Asignatura.objects().first()
+	profesor = Profesor.objects().first()
+	alumnos = Alumno.objects().all()
+	grado = Grado.objects().first()
+	curso_base = CursoBase.objects().first()
+
+	if((institucion==None) or (asignatura==None) or (profesor==None) or (alumnos==None) or (grado==None) or (curso_base==None)):
+		assert True
+	else:
+		alumnos_array = []
+		for alumno in alumnos:
+			alumnos_array.append(alumno.id)
+		data = {
+			'nombre': 'nombre',
+			'fecha_creacion': '01/01/2000',
+			'preguntas': [],
+			'asignatura': str(asignatura.id),
+			'institucion': str(institucion.id),
+			'profesor': str(profesor.id),
+			'alumnos': alumnos_array,
+			'grado': str(grado.id),
+			'activo': True,
+			'version': '1.0',
+			'curso_base': str(curso_base.id),
+			'descripcion': 'descripcion del curso'
+		}
+
+		rv = client.post('/cursos', data=data)
+		assert True
+
+
+
