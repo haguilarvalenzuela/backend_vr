@@ -12,7 +12,7 @@ script:
   - sudo apt-get install -y mongodb-org
   - sudo service mongod status
   - sudo service mongod start
-  - mongorestore /home/travis/build/haguilarvalenzuela/backend_vr/db_backup
+  #- mongorestore /home/travis/build/haguilarvalenzuela/backend_vr/db_backup
   - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr
   - export FLASK_ENV=development
   - pytest -v
