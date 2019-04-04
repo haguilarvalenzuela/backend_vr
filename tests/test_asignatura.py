@@ -39,6 +39,8 @@ def test_post_asignatura(client):
 			'nombre': 'nombre',
 			'institucion': str(institucion.id)
 		}
+		data = json.dumps(data)
+		data = data.encode()
 		rv = client.post('/asignaturas', data=data)
 		assert True
 
@@ -52,5 +54,7 @@ def test_put_asignatura(client):
 			'nombre': 'nombre',
 			'institucion': str(institucion.id)
 		}
+		data = json.dumps(data)
+		data = data.encode()
 		rv = client.put('/asignaturas/'+str(asignatura.id), data=data)
 		assert True

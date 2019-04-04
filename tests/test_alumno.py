@@ -84,6 +84,19 @@ def test_post_alumno_curso(client):
     if((alumno==None) or (curso==None)):
         assert True
     else:
+        data = {
+            'nombres': 'nombre prueba',
+            'apellido_paterno': 'paterno',
+            'apellido_materno': 'materno',
+            'email': 'prueba@prueba.prueba',
+            'telefono': '+560',
+            'nombre_usuario': 'usuario_prueba',
+            'password': 'asd',
+            'matricula': 'matricula',
+            'institucion': str(institucion.id)
+        }
+        data = json.dumps(data)
+        data = data.encode()
         rv = client.post('/alumno_curso/'+str(curso.id)+'/'+str(alumno.id))
         assert True
 
@@ -106,7 +119,8 @@ def test_put_alumno(client):
             'matricula': 'matricula',
             'institucion': str(institucion.id)
         }
-
+        data = json.dumps(data)
+        data = data.encode(data)
         rv = client.put('/alumnos/'+str(alumno.id), data=data)
         assert True
 
