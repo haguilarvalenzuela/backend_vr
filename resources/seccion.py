@@ -14,7 +14,7 @@ def init_module(api):
     api.add_resource(SeccionesContacto, '/seccion_contacto')
 
 
-class SeccionItem(Resource):
+class SeccionesItem(Resource):
     def get(self, id):
         return json.loads(Seccion.objects(id=id).first().to_json())
 
