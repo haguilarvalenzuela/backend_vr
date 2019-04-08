@@ -6,6 +6,11 @@ import json
 
 def init_module(api):
     api.add_resource(Secciones, '/secciones')
+    api.add_resource(SeccionesBanner, '/seccion_banner')
+    api.add_resource(SeccionesSlider, '/seccion_slider')
+    api.add_resource(SeccionesCurso, '/seccion_cursos')
+    api.add_resource(SeccionesNosotros, '/seccion_nosotros')
+    api.add_resource(SeccionesContacto, '/seccion_contacto')
 
 
 class SeccionItem(Resource):
@@ -37,32 +42,31 @@ class Secciones(Resource):
 
     		dataJson = {'tipo': seccion.tipo, 'contenido': contenido}
     		arrayJson.append(dataJson)
-
-
-
-    	# arrayJson = json.dumps(arrayJson)
-    	#return json.loads(arrayJson)
     	return arrayJson
 
 
-    def renderContentBanner(self):
-    	contenido = '<h1>Components</h1>'
-    	contenido += '<p>Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages. <a class="text-white" href="#">click here.</a></p>'
-    	return contenido
+class SeccionesBanner(Resource):
+    def get(self):
+        contenido = '<h1>Components</h1>'
+        contenido += '<p>Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages. <a class="text-white" href="#">click here.</a></p>'
+        return contenido
 
+class SeccionesSlider(Resource):
     def renderContentSlider(self):
-    	contenido = []
-    	cantidad_slide = 3
-    	i = 1
-    	while(i <= 3):
-    		contenido.append('VRKIDS Slide {}'.format(i))
-    		i += 1
-    	return contenido
+        contenido = []
+        cantidad_slide = 3
+        i = 1
+        while(i <= 3):
+            contenido.append('VRKIDS Slide {}'.format(i))
+            i += 1
+        return contenido
 
+class SeccionesCursos(Resource):
     def renderContentCursos(self):
-    	contenido = 'Some quick example text from API VRKIDS  test_texttest_texttest_texttest_texttest_texttest_texttest_texttest_text'
-    	return contenido
+        contenido = 'Some quick example text from API VRKIDS  test_texttest_texttest_texttest_texttest_texttest_texttest_texttest_text'
+        return contenido
 
+class SeccionesNosotros(Resource):
     def renderContentNosotros(self):
         titulo = 'VrFromApi'
         parrafo = 'texto prueba api texto prueba api texto prueba apitexto prueba apitexto prueba apitexto prueba apitexto prueba api texto prueba api texto prueba api texto prueba api'
@@ -81,6 +85,7 @@ class Secciones(Resource):
 
         return contenido
 
+class SeccionesContacto(Resource):
     def renderContentContacto(self):
 
         direccion = 'Direcion #123. Santiago, Chile'
@@ -89,4 +94,3 @@ class Secciones(Resource):
 
         contenido = {'direccion': direccion, 'telefono': telefono, 'email': email}
         return contenido
-    	
