@@ -62,7 +62,7 @@ class SeccionesSlider(Resource):
             i += 1
         return contenido
 
-class SeccionesCursos(Resource):
+class SeccionesCurso(Resource):
     def get(self):
         contenido = 'Some quick example text from API VRKIDS  test_texttest_texttest_texttest_texttest_texttest_texttest_texttest_text'
         return contenido
