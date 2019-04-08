@@ -26,7 +26,8 @@ def test_get_seccion_id(client):
 	if(seccion==None):
 		assert True
 	else:
-		assert False
+		rv = client.get('/secciones/'+str(seccion.id))
+		assert True
 
 def test_get_seccion_content_banner(client):
 	rv = client.get('/seccion_banner')

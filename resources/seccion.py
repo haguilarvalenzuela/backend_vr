@@ -6,6 +6,7 @@ import json
 
 def init_module(api):
     api.add_resource(Secciones, '/secciones')
+    api.add_resource(SeccionesItem, '/secciones/<id>')
     api.add_resource(SeccionesBanner, '/seccion_banner')
     api.add_resource(SeccionesSlider, '/seccion_slider')
     api.add_resource(SeccionesCurso, '/seccion_cursos')
@@ -52,7 +53,7 @@ class SeccionesBanner(Resource):
         return contenido
 
 class SeccionesSlider(Resource):
-    def renderContentSlider(self):
+    def get(self):
         contenido = []
         cantidad_slide = 3
         i = 1
@@ -62,12 +63,12 @@ class SeccionesSlider(Resource):
         return contenido
 
 class SeccionesCursos(Resource):
-    def renderContentCursos(self):
+    def get(self):
         contenido = 'Some quick example text from API VRKIDS  test_texttest_texttest_texttest_texttest_texttest_texttest_texttest_text'
         return contenido
 
 class SeccionesNosotros(Resource):
-    def renderContentNosotros(self):
+    def get(self):
         titulo = 'VrFromApi'
         parrafo = 'texto prueba api texto prueba api texto prueba apitexto prueba apitexto prueba apitexto prueba apitexto prueba api texto prueba api texto prueba api texto prueba api'
         
@@ -86,7 +87,7 @@ class SeccionesNosotros(Resource):
         return contenido
 
 class SeccionesContacto(Resource):
-    def renderContentContacto(self):
+    def get(self):
 
         direccion = 'Direcion #123. Santiago, Chile'
         telefono = '+56 9 123 45 678'
