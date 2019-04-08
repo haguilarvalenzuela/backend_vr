@@ -26,4 +26,5 @@ def test_get_institucion_id(client):
 	if(institucion==None):
 		assert True
 	else:
-		assert False
+		rv = client.get('/instituciones/'+str(institucion.id))
+		assert True

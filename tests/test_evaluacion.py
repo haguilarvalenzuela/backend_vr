@@ -26,5 +26,6 @@ def test_get_evaluacion_id(client):
 	if(evaluacion==None):
 		assert True
 	else:
-		assert False
+		rv = client.get('/evaluaciones/'+str(evaluacion.id))
+		assert True
 

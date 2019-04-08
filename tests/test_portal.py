@@ -26,4 +26,5 @@ def test_get_portal_id(client):
 	if(portal==None):
 		assert True
 	else:
-		assert False
+		rv = client.get('/portales/'+str(portal.id))
+		assert True

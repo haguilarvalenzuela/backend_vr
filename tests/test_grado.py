@@ -26,4 +26,5 @@ def test_get_grado_id(client):
 	if(grado==None):
 		assert True
 	else:
-		assert False
+		rv = client.get('/grados/'+str(grado.id))
+		assert True
