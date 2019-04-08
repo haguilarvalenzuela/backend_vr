@@ -6,7 +6,7 @@ import mongoengine_goodjson as gj
 class Grado(gj.Document):
     institucion = db.ReferenceField(Institucion)
     nivel = db.IntField()
-    identificador = db.StringField(max_length=5)
+    identificador = db.StringField(max_length=60)
     def __str__(self):
         return str(self.nivel)+"°"+self.identificador
 
