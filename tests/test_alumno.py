@@ -83,7 +83,13 @@ def test_get_alumno_cursos(client):
         rv = client.get('/alumnos_grado/'+str(grado.id))
         assert rv.data
 
-
+def test_get_alumnos_colegio(client):
+    institucion = Institucion.objects().first()
+    if(institucion==None):
+        assert True
+    else:
+        rv = client.get('/alumnos_colegio/'+str(institucion.id))
+        assert True
 
 def test_post_alumno_curso(client):
     curso = Curso.objects().first()

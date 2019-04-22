@@ -140,3 +140,7 @@ class Alumnos(Resource):
 
     def get(self):
         return json.loads(Alumno.objects().all().to_json())
+
+class AlumnosColegio(Resource):
+    def get(self, id_institucion):
+        return json.loads(Alumno.objects(institucion = id_institucion).all().to_json())
