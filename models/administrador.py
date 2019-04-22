@@ -15,6 +15,18 @@ class Administrador(gj.Document, UserMixin):
     institucion = db.ReferenceField(Institucion)
     meta = {'strict': False}
 
+    def to_dict(self):
+        return {
+            "id": str(self.id),
+            "nombres": self.nombres,
+            "apellido_paterno": self.apellido_paterno,
+            "apellido_materno": self.apellido_materno,
+            "email": self.email,
+            "telefono": self.telefono,
+            "nombre_usuario": self.nombre_usuario,
+            "password": self.password
+        }
+
     def encrypt_password(self, password_to_encrypt):
     	self.password = generate_password_hash(password_to_encrypt)
 

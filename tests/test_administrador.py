@@ -29,3 +29,22 @@ def test_get_administrador(client):
     else:
         rv = client.get('/administradores/'+str(administrador.id))
         assert True
+
+def test_put_administrador(client):
+    administrador = Administrador.objects().first()
+    if(administrador==None):
+        assert True
+    else:
+        data = {
+            'nombres': 'nombre admin',
+            'apellido_paterno': 'paterno',
+            'apellido_materno': 'materno' ,
+            'email': 'email@email.email',
+            'telefono': '+569',
+            'nombre_usuario': 'usuario',
+            'password': 'pass'
+        }
+        data = json.dumps(data)
+        data = data.encode()
+        rv = client.put('/administradores/'+str(administrador.id), data=data)
+        assert True
