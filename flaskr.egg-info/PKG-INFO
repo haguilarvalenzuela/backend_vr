@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: flaskr
+Version: 1.0.0
+Summary: Testing for vr.
+Home-page: http://flask.pocoo.org/docs/tutorial/
+Maintainer: Nice Dev
+Maintainer-email: 
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
+Provides-Extra: test
