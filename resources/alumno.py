@@ -12,6 +12,7 @@ def init_module(api):
     api.add_resource(AlumnoCursos, '/alumno_cursos/<id>')
     api.add_resource(AlumnosCurso, '/alumnos_curso/<id_curso>')
     api.add_resource(AlumnoCurso, '/alumno_curso/<id_curso>/<id_alumno>')
+    api.add_resource(AlumnosGrado, '/alumnos_grado/<id>')
 
 
 
@@ -59,8 +60,15 @@ class AlumnoCursos(Resource):
                     }) 
         return cursosRespuesta
 
-    # def get(self):
-    #     return json.loads(Alumno.objects(id=id).all().to_json())    
+class AlumnosGrado(Resource):
+    def get(self,id):
+        alumnos = []
+        grado = Grado.objects(id=id).first()
+        for alumno in Alumno.objects().all():
+            if alumno.grado == grado:
+                if alumno.activo:
+                    alumnos.append(alumno.to_dict())
+        return alumnos
 
 class AlumnosCurso(Resource):
     def get(self, id_curso):

@@ -6,6 +6,7 @@ import pytest
 from flaskr import api
 from models.alumno import Alumno
 from models.curso import Curso
+from models.grado import Grado
 from models.institucion import Institucion
 
 @pytest.fixture
@@ -65,13 +66,21 @@ def test_get_alumnos_curso(client):
         rv = client.get('/alumnos_curso/'+str(curso.id))
         assert True
 
-def test_get_alumno_cursos(client):
-
+def test_get_alumnos_grado(client):
     alumno = Alumno.objects().first()
     if(alumno==None):
         assert True
     else:
-        rv = client.get('/alumno_cursos/'+str(alumno.id))
+        rv = client.get('')
+        assert rv.data
+
+def test_get_alumno_cursos(client):
+
+    grado = Grado.objects().first()
+    if(grado==None):
+        assert True
+    else:
+        rv = client.get('/alumnos_grado/'+str(grado.id))
         assert rv.data
 
 
