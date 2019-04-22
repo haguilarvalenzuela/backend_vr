@@ -41,6 +41,7 @@ def init_modules(app, api):
     seccion.init_module(api)
     grado.init_module(api)
     login.init_module(api)
+    administrador.AdminGenerate()
 
 init_modules(app, api)
 
