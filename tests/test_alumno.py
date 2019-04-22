@@ -86,27 +86,12 @@ def test_get_alumno_cursos(client):
 
 
 def test_post_alumno_curso(client):
-
-    alumno = Alumno.objects().first()
     curso = Curso.objects().first()
-
-    if((alumno==None) or (curso==None)):
+    alumno = Alumno.objects().first()
+    if((curso==None) or (alumno==None)):
         assert True
     else:
-        data = {
-            'nombres': 'nombre prueba',
-            'apellido_paterno': 'paterno',
-            'apellido_materno': 'materno',
-            'email': 'prueba@prueba.prueba',
-            'telefono': '+560',
-            'nombre_usuario': 'usuario_prueba',
-            'password': 'asd',
-            'matricula': 'matricula',
-            'institucion': str(institucion.id)
-        }
-        data = json.dumps(data)
-        data = data.encode()
-        rv = client.post('/alumno_curso/'+str(curso.id)+'/'+str(alumno.id))
+        rv = client.post('/alumno_curso/'+str(alumno.nombre_usuario)+'/'+str(curso.id))
         assert True
 
 def test_put_alumno(client):

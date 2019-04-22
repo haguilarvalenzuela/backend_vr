@@ -83,12 +83,23 @@ class AlumnosCurso(Resource):
         return alumnos_array
 
 class AlumnoCurso(Resource):
-    def post(self, id_curso, id_alumno):
-        idAlumno = ObjectId(id_alumno)
+    def post(self, id_curso, nombre_usuario):
+        alumno = Alumno.objects(nombre_usuario= nombre_usuario).first()
+        alumnos = Alumno.objects().all()
+        if alumno == None:
+            return {'Response': 'no_existe'}
         curso = Curso.objects(id=id_curso).first()
-        curso.alumnos.append(idAlumno)
-        curso.save()
+        if not alumno.activo:
+            return {'Response': 'no_existe'}
+        if str(alumno.grado.id) != str(curso.grado.id):
+            return {'Response': 'no_pertenece'}
 
+        for alumno_aux in curso.alumnos:
+            if alumno_aux.id == alumno.id:
+                return {'Response': 'si_pertenece'}
+        
+        curso.alumnos.append(alumno.id)
+        curso.save()
         return {'Response': 'exito'}
 
     def delete(self, id_curso, id_alumno):
