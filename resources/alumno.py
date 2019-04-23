@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify, request, send_file
 from models.alumno import Alumno
 from models.curso import Curso
 from flask_restful import Api, Resource, url_for
@@ -13,8 +13,8 @@ def init_module(api):
     api.add_resource(AlumnosCurso, '/alumnos_curso/<id_curso>')
     api.add_resource(AlumnoCurso, '/alumno_curso/<id_curso>/<id_alumno>')
     api.add_resource(AlumnosGrado, '/alumnos_grado/<id>')
-
-
+    api.add_resource(AlumnosColegio, '/alumnos_colegio/<id_institucion>')
+    api.add_resource(AlumnoImagenItem, '/alumno_imagen/<id>')
 
 class AlumnoItem(Resource):
     def get(self, id):
@@ -144,3 +144,18 @@ class Alumnos(Resource):
 class AlumnosColegio(Resource):
     def get(self, id_institucion):
         return json.loads(Alumno.objects(institucion = id_institucion).all().to_json())
+
+
+# class AlumnoImagenItem(Resource):
+#     def post(self,id):
+#         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
+#         imagen.save(os.path.join("uploads/alumnos", str(id)+".jpg"))
+#         imagen.thumbnail((200, 100))
+#         imagen.save(os.path.join("uploads/alumnos", str(id)+'_thumbnail.jpg'))
+#         alumno = Alumno.objects(id=id).first()
+#         alumno.imagen = str(id)
+#         alumno.save()
+#         return {'Response': 'exito'}
+    
+#     def get(self,id):
+#         return send_file('uploads/alumnos/'+id+'_thumbnail.jpg')

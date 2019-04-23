@@ -91,6 +91,15 @@ def test_get_alumnos_colegio(client):
         rv = client.get('/alumnos_colegio/'+str(institucion.id))
         assert True
 
+# def test_get_alumno_imagen(client):
+#     alumno = Alumno.objects().first()
+#     if(alumno==None):
+#         assert True
+#     else:
+#         rv = client.get('/alumno_imagen/'+str(alumno.id))
+#         assert True
+
+
 def test_post_alumno_curso(client):
     curso = Curso.objects().first()
     alumno = Alumno.objects().first()
