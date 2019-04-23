@@ -22,7 +22,33 @@ class Curso(gj.Document):
     version = db.StringField(default="1.0")
     curso_base = db.ReferenceField(CursoBase)
     descripcion = db.StringField( max_length=200)
-    meta = {'strict': False}
-
+    aprobacion = db.IntField( default=0 )
+    imagen = db.StringField()
+    meta = {'strict': False }
+    
     def __str__(self):
         return self.nombre
+    
+    def to_dict(self):
+        preguntas = []
+        for pregunta in self.preguntas:
+            preguntas.append(pregunta.to_dict())
+        
+        alumnos = []
+        for alumno in self.alumnos:
+            alumnos.append(alumno.to_dict())
+        return{
+            "id": str(self.id),
+            "nombre": self.nombre,
+            "fecha_creacion": str(self.fecha_creacion),
+            "preguntas": preguntas,
+            "asignatura": self.asignatura.to_dict(),
+            "profesor": self.profesor.to_dict(),
+            "alumnos": alumnos,
+            "grado": self.grado.to_dict(),
+            "activo": self.activo,
+            "version": self.version,
+            "descripcion": self.descripcion,
+            "aprobacion": self.aprobacion,
+            "imagen": self.imagen
+        }
