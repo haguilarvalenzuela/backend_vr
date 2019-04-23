@@ -33,11 +33,23 @@ def test_get_inscripcion_id(client):
 		assert True
 
 def test_get_inscripcion_curso(client):
-	inscripcion = Inscripcion.objects().first()
-	if(inscripcion==None):
+	curso = Curso.objects().first()
+	if(curso==None):
 		assert True
 	else:
-		rv = client.get('/inscripciones_curso/'+str(inscripcion.id))
+		rv = client.get('/inscripciones_curso/'+str(curso.id))
+		assert True
+
+def test_post_inscripcion_curso(client):
+	curso = Curso.objects().first()
+	alumno = Alumno.objects().first()
+	if((curso==None) or (alumno==None)):
+		assert True
+	else:
+		data = {
+			"alumno": str(alumno.id)
+		}
+		rv = client.get('/inscripciones_curso/'+str(curso.id), data=data)
 		assert True
 
 def test_put_inscripcion_id(client):
