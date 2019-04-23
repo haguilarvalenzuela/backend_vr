@@ -30,7 +30,11 @@ def test_get_grado_id(client):
 		rv = client.get('/grados/'+str(grado.id))
 		assert True
 
-def test_poost_grado(client):
+def test_get_grados_detalle(client):
+	rv = client.get('/grados_detalle')
+	assert True
+
+def test_post_grado(client):
 	institucion = Institucion.objects().first()
 	
 	if(institucion==None):
