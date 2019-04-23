@@ -5,6 +5,7 @@ import pytest
 
 from flaskr import api
 from models.grado import Grado
+from models.institucion import Institucion
 
 @pytest.fixture
 def client():
@@ -27,6 +28,23 @@ def test_get_grado_id(client):
 		assert True
 	else:
 		rv = client.get('/grados/'+str(grado.id))
+		assert True
+
+def test_poost_grado(client):
+	institucion = Institucion.objects().first()
+	
+	if(institucion==None):
+		assert True
+	else:
+		data = {
+			"institucion": str(institucion.id),
+			"nivel": 1,
+			"identificador": 'A',
+			"activo": True
+		}
+		data = json.dumps(data)
+		data = data.encode(data)
+		rv = client.post('/grados', data=data)
 		assert True
 
 def test_delete_grado_id(client):
