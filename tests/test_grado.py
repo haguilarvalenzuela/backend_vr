@@ -28,3 +28,11 @@ def test_get_grado_id(client):
 	else:
 		rv = client.get('/grados/'+str(grado.id))
 		assert True
+
+def test_delete_grado_id(client):
+	grado = Grado.objects().first()
+	if(grado==None):
+		assert True
+	else:
+		rv = client.delete('/grados/'+str(grado.id))
+		assert True
