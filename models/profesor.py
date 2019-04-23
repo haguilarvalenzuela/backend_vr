@@ -10,14 +10,30 @@ class Profesor(gj.Document, UserMixin):
     apellido_paterno = db.StringField(max_length=20)
     apellido_materno = db.StringField(max_length=20)
     email = db.EmailField()
-    telefono = db.StringField(max_length=12)
+    telefono = db.StringField(max_length=20)
     nombre_usuario = db.StringField(max_length=20)
     password = db.StringField(max_length=255)
     institucion = db.ReferenceField(Institucion)
+    imagen = db.StringField()
+    activo = db.BooleanField(default=True)
     meta = {'strict': False}
 
     def __str__(self):
         return self.nombres
+    
+    def to_dict(self):
+        return{
+            "id": str(self.id),
+            "nombres": self.nombres,
+            "apellido_paterno": self.apellido_paterno,
+            "apellido_materno": self.apellido_materno,
+            "email": self.email,
+            "telefono": self.telefono,
+            "nombre_usuario": self.nombre_usuario,
+            "password": self.password,
+            "imagen": self.imagen,
+            "activo": self.activo
+        }
 
 
     def encrypt_password(self, password_to_encrypt):
