@@ -19,8 +19,8 @@ def client():
 def test_post_login(client):
 	data = {
 		'tipo': 'ADMINISTRADOR',
-		'email': 'prueba@prueba.prueba',
-		'password': 'asd'
+		'email': 'admin@admin.cl',
+		'password': 'pass'
 	}
 
 	data = json.dumps(data)

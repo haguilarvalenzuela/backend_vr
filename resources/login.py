@@ -16,12 +16,39 @@ class Login(Resource):
         data = request.data.decode()
         data = json.loads(data)
         
-        if(data['tipo'] == 'ADMINISTRADOR'):
-            administrador = Administrador.objects(email = data['email'], password = data['password']).first()
-            if(administrador == None):
+        if data['tipo'] == 'ADMINISTRADOR':
+            administrador = Administrador.objects(email = data['email']).first()
+            if administrador == None :
                 return {'respuesta': 'no_existe'}
             else:
-                return {'respuesta': json.loads(administrador.to_json()), 'tipo': 'ADMINISTRADOR'}
+                #if(administrador.password == data['password']):
+                if(administrador.check_password(data['password'])):
+                    return {'respuesta':{'id':str(administrador.id), 'institucion': str(administrador.institucion.id) } , 'tipo': 'ADMINISTRADOR'}
+                else:
+                    return {'respuesta': 'no_existe'}
+        if data['tipo'] == 'PROFESOR':
+            profesor = Profesor.objects(email = data['email']).first()
+            if profesor == None :
+                return {'respuesta': 'no_existe'}
+            if not profesor.activo:
+                return {'respuesta': 'no_existe'}
+            else:
+                if(profesor.password == data['password']):
+                    return { 'respuesta': json.loads(profesor.to_json()), 'tipo': 'PROFESOR'}
+                else:
+                    return {'respuesta': 'no_existe'}
+
+        if data['tipo'] == 'ALUMNO':
+            alumno = Alumno.objects(email= data['email']).first()
+            if alumno == None:
+                return {'respuesta': 'no_existe'}
+            if not alumno.activo:
+                return {'respuesta': 'no_existe'}
+            else:
+                if(alumno.check_password(data['password'])):
+                    return {'respuesta': json.loads(alumno.to_json()), 'tipo': 'ALUMNO'}
+                else:
+                    return {'respuesta': 'no_existe'}
 
 class Logout(Resource):
     def post(self):
