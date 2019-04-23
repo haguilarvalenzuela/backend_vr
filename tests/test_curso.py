@@ -72,6 +72,13 @@ def test_get_curso_alumnos(client):
 	rv = client.get('/cursos_alumnos')
 	assert True
 
+def test_get_cursos_grado(client):
+	grado = Grado.objects().first()
+	if(grado==None):
+		assert True
+	else:
+		rv = client.get('/cursos_de_grado'+str(grado.id))
+		assert True
 
 def test_post_agregar_alumnos(client):
 	curso = Curso.objects().first()
