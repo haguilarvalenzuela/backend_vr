@@ -13,3 +13,15 @@ class Evaluacion(gj.Document):
     respuestas = db.ListField(db.EmbeddedDocumentField(Respuesta))
     acierto = db.IntField()
     meta = {'strict': False}
+
+    def to_dict(self):
+        respuestas = []
+        for respuesta in self.respuestas:
+            respuestas.append(respuesta.to_dict())
+        return{
+            "id": str(self.id),
+            "alumno": self.alumno.to_dict,
+            "curso": self.curso.to_dict(),
+            "respuestas": respuestas,
+            "acierto": self.acierto
+        }
