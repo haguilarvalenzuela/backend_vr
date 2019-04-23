@@ -40,6 +40,14 @@ def test_get_inscripcion_curso(client):
 		rv = client.get('/inscripciones_curso/'+str(curso.id))
 		assert True
 
+def test_get_inscripcion_alumnos(client):
+	alumno = Alumno.objects().first()
+	if(alumno==None):
+		assert True
+	else:
+		rv = client.get('/inscripciones_alumno/'+str(alumno.id))
+		assert True
+
 def test_post_inscripcion_curso(client):
 	curso = Curso.objects().first()
 	alumno = Alumno.objects().first()
