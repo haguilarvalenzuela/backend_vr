@@ -14,7 +14,7 @@ def init_module(api):
     api.add_resource(AlumnoCurso, '/alumno_curso/<id_curso>/<id_alumno>')
     api.add_resource(AlumnosGrado, '/alumnos_grado/<id>')
     api.add_resource(AlumnosColegio, '/alumnos_colegio/<id_institucion>')
-    api.add_resource(AlumnoImagenItem, '/alumno_imagen/<id>')
+    #api.add_resource(AlumnoImagenItem, '/alumno_imagen/<id>')
 
 class AlumnoItem(Resource):
     def get(self, id):
