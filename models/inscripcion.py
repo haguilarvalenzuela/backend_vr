@@ -18,3 +18,14 @@ class Inscripcion(gj.Document):
     estado = db.StringField(choices=TIPOS_ESTADO_INSCRIPCION)
     historial = db.ListField(db.EmbeddedDocumentField(Historial))
     meta = {'strict': False}
+
+    def to_dict(self):
+        historiales=[]
+        for historial in self.historial:
+            historiales.append(historial.to_dict())
+        return{
+            "alumno": self.alumno.to_dict(),
+            "curso": self.curso.to_dict(),
+            "estado": self.estado,
+            "historial": historiales
+        }

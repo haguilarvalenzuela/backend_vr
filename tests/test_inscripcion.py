@@ -5,6 +5,9 @@ import pytest
 
 from flaskr import api
 from models.inscripcion import Inscripcion
+from models.alumno import Alumno
+from models.curso import Curso
+from models.historial import Historial
 
 @pytest.fixture
 def client():
@@ -27,6 +30,25 @@ def test_get_inscripcion_id(client):
 		assert True
 	else:
 		rv = client.get('/inscripciones/'+str(inscripcion.id))
+		assert True
+
+def test_put_inscripcion_id(client):
+	inscripcion = Inscripcion.objects().first()
+	alumno = Alumno.objects().first()
+	curso = Curso.objects().first()
+	if((inscripcion==None) or (alumno==None) or (curso==None)):
+		assert True
+	else:
+		historial = Historial()
+		historial.data = "Testing"
+		data = {
+			"alumno": str(alumno.id),
+			"curso": str(curso.id),
+			"estado": "ENVIADA",
+			"historial": [historial]
+		}
+
+		rv = client.put('/inscripciones/'+str(inscripcion.id), data=data)
 		assert True
 
 def test_delete_inscripcion_id(client):
