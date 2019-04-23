@@ -30,6 +30,10 @@ def test_get_asignaturas(client):
 	rv = client.get('/asignaturas')
 	assert True
 
+def test_get_asignaturas_detalles(client):
+	rv = client.get('/asignaturas_detalle')
+	assert True
+
 def test_post_asignatura(client):
 	institucion = Institucion.objects().first()
 	if(institucion==None):

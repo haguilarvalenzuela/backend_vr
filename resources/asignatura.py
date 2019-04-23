@@ -7,6 +7,7 @@ import json
 def init_module(api):
     api.add_resource(AsignaturaItem, '/asignaturas/<id>')
     api.add_resource(Asignaturas, '/asignaturas')
+    api.add_resource(AsignaturasDetalle, '/asignaturas_detalle')
 
 class AsignaturaItem(Resource):
     def get(self, id):
@@ -36,3 +37,22 @@ class Asignaturas(Resource):
         asignatura.nombre = data['nombre']
         asignatura.save()
         return {'Response': 'exito'}
+
+class AsignaturasDetalle(Resource):
+    def get(self):
+        response = []
+        asignaturas = Asignatura.objects().all()
+        for asignatura in asignaturas:
+            if asignatura.activo:
+                cursos_lista = []
+                cursos = Curso.objects(asignatura = asignatura.id).all()
+                for curso in cursos:
+                    cursos_lista.append({
+                        'nombre': curso.nombre
+                    })
+                response.append({
+                    'id': str(asignatura.id),
+                    'nombre': asignatura.nombre,
+                    'cursos': cursos_lista
+                })
+        return response
