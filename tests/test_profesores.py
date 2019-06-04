@@ -28,7 +28,8 @@ def test_get_profesor_id(client):
     if(profesor==None):
         assert True
     else:
-        assert False
+        rv = client.get('/profesores/'+str(profesor.id))
+        assert True
 
 def test_get_profesor_cursos(client):
 
