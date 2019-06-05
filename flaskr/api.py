@@ -6,7 +6,8 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.config.secret_key = os.urandom(24)
+app.config["TOKEN_SALT"] = os.urandom(24)
 CORS(app)
 login_manager = LoginManager()
 login_manager.init_app(app)

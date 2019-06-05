@@ -4,6 +4,7 @@ import json
 import pytest
 
 from flaskr import api
+from flask import current_app
 from models.administrador import Administrador
 
 @pytest.fixture
@@ -18,9 +19,8 @@ def client():
     os.unlink(api.app.config['DATABASE'])
 
 def test_get_administradores(client):
-
-	rv = client.get('/administradores')
-	assert rv.data
+    rv = client.get('/administradores')
+    assert rv.data
 
 def test_get_administrador(client):
     administrador = Administrador.objects().first()
@@ -29,6 +29,16 @@ def test_get_administrador(client):
     else:
         rv = client.get('/administradores/'+str(administrador.id))
         assert True
+
+def test_get_admin_token(client):
+
+    with api.app.app_context():
+        administrador = Administrador.objects().first()
+        token = administrador.get_token()
+        assert token
+
+#def test_get_finalizar_tutorial_admin(client):
+
 
 def test_put_administrador(client):
     administrador = Administrador.objects().first()
