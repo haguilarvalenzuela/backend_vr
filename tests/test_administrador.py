@@ -42,12 +42,15 @@ def test_get_admin_token(client):
         elif administrador.to_dict() ==  response:
             assert True
 
-# def test_get_finalizar_tutorial_admin(client):
-
-#     with api.app.app_context():
-
-
-
+def test_get_finalizar_tutorial_admin(client):
+    with api.app.app_context():
+        administrador = Administrador.objects().first()
+        if administrador == None:
+            assert True
+        else:
+            rv = client.get('/administrador_finalizar_tutorial/'+str(administrador.id))
+            assert True
+        
 def test_put_administrador(client):
     administrador = Administrador.objects().first()
     if(administrador==None):
