@@ -34,14 +34,18 @@ def test_get_admin_token(client):
 
     with api.app.app_context():
         administrador = Administrador.objects().first()
-        response = administrador.get_token()
+        token = administrador.get_token()
+        response = client.get('/administradores', headers={'auth-token': token})
         empty = []
         if response ==  empty:
             assert True
         elif administrador.to_dict() ==  response:
             assert True
 
-#def test_get_finalizar_tutorial_admin(client):
+# def test_get_finalizar_tutorial_admin(client):
+
+#     with api.app.app_context():
+
 
 
 def test_put_administrador(client):
