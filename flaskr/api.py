@@ -29,6 +29,7 @@ def init_modules(app, api):
     from resources import seccion
     from resources import grado
     from resources import login
+    from resources import categoria
 
     curso.init_module(api)
     alumno.init_module(api)
@@ -42,6 +43,7 @@ def init_modules(app, api):
     seccion.init_module(api)
     grado.init_module(api)
     login.init_module(api)
+    categoria.init_module(api)
     administrador.AdminGenerate()
 
 init_modules(app, api)

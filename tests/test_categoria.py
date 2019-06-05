@@ -26,3 +26,8 @@ def test_get_categorias(client):
 	else:
 		rv = client.get('/categorias/'+str(institucion.id))
 		assert rv.data
+
+def test_get_imagen_categoria(client):
+	rv = client.get('/categoria_imagen/'+'default')
+	if rv.data:
+		assert True
