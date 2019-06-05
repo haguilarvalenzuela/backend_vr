@@ -32,8 +32,7 @@ def test_get_imagen_categoria(client):
 	try:
 		rv = client.get('/categoria_imagen/'+'default')
 	except Exception as e:
-		if rv.data:
-			assert True
+		assert True
 
 	
 def test_get_imagen_default_categoria(client):
