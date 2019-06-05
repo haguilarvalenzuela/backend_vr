@@ -67,9 +67,6 @@ class Administrador(gj.Document, UserMixin):
     
     # token alive 10 hours
     def get_token(self, seconds_live=36000):
-        print('current app:')
-        print(current_app.name)
-        
         token = Serializer(current_app.config.get("TOKEN_SALT"),
                            expires_in=seconds_live)
         return str(token.dumps({'id': str(self.id)}))
