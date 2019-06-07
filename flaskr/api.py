@@ -30,6 +30,7 @@ def init_modules(app, api):
     from resources import grado
     from resources import login
     from resources import categoria
+    from resources import vrkids
 
     curso.init_module(api)
     alumno.init_module(api)
@@ -44,6 +45,7 @@ def init_modules(app, api):
     grado.init_module(api)
     login.init_module(api)
     categoria.init_module(api)
+    vrkids.init_module(api)
     administrador.AdminGenerate()
 
 init_modules(app, api)
