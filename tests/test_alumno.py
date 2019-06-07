@@ -22,12 +22,19 @@ def client():
 
 def test_post_alumno(client):
 
+    grado = Grado.objects().first()
+    if grado == None:
+        grado = 'None'
+    else:
+        grado = str(grado.id)
     data_personal = {
         'nombres':'nombre prueba',
         'apellido_paterno':'paterno',
         'apellido_materno':'materno',
         'email':'email@email.email',
-        'telefono':'+569'
+        'telefono':'+569',
+        'imagen': 'path/to/img',
+        'grado': grado
     }
 
     data_academico = {
@@ -54,6 +61,8 @@ def test_get_alumnos(client):
 def test_get_alumno(client):
 
     alumno = Alumno.objects().first()
+    if alumno == None:
+        return 'No hay alumnos'
     rv = client.get('/alumnos/'+str(alumno.id))
     assert rv.data
 

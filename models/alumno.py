@@ -41,20 +41,36 @@ class Alumno(gj.Document, UserMixin):
         return self.nombres
 
     def to_dict(self):
-        return {
-            "id": str(self.id),
-            "nombres": self.nombres,
-            "apellido_paterno": self.apellido_paterno,
-            "apellido_materno": self.apellido_materno,
-            "email": self.email,
-            "telefono": self.telefono,
-            "nombre_usuario": self.nombre_usuario,
-            "matricula": self.matricula,
-            "grado": self.grado.to_dict(),
-            "imagen": self.imagen,
-            "activo": self.activo,
-            "primera_vez": self.primera_vez
-        }
+        if self.grado == None:
+            return {
+                "id": str(self.id),
+                "nombres": self.nombres,
+                "apellido_paterno": self.apellido_paterno,
+                "apellido_materno": self.apellido_materno,
+                "email": self.email,
+                "telefono": self.telefono,
+                "nombre_usuario": self.nombre_usuario,
+                "matricula": self.matricula,
+                #"grado": self.grado.to_dict(),
+                "imagen": self.imagen,
+                "activo": self.activo,
+                "primera_vez": self.primera_vez
+            }
+        else:
+            return {
+                "id": str(self.id),
+                "nombres": self.nombres,
+                "apellido_paterno": self.apellido_paterno,
+                "apellido_materno": self.apellido_materno,
+                "email": self.email,
+                "telefono": self.telefono,
+                "nombre_usuario": self.nombre_usuario,
+                "matricula": self.matricula,
+                "grado": self.grado.to_dict(),
+                "imagen": self.imagen,
+                "activo": self.activo,
+                "primera_vez": self.primera_vez
+            }
 
     def encrypt_password(self, password_to_encrypt):
         self.password = generate_password_hash(password_to_encrypt)

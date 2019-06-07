@@ -31,7 +31,7 @@ def test_curso_cargar_failed(client):
         rv = client.get('/recursos/'+id_invalid_resource, headers={'auth_token':token})
         response = rv.data.decode("utf-8")
         response_json = json.loads(response)
-        rsp_msg = response['response']    
+        rsp_msg = response_json['response']    
         if rsp_msg == 'no_token':
             assert b'no_token' in rv.data
 

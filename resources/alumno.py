@@ -142,17 +142,22 @@ class Alumnos(Resource):
         data = request.data.decode()
         data = json.loads(data)
         alumno = Alumno()
-        alumno.nombres = data['nombres']
-        alumno.apellido_paterno = data['apellido_paterno']
-        alumno.apellido_materno = data['apellido_materno']
-        alumno.telefono = data['telefono']
-        alumno.email = data['email']
-        alumno.nombre_usuario = data['nombre_usuario']        
-        alumno.encrypt_password(data['nombre_usuario'])
-        alumno.matricula = data['matricula']
+        alumno.nombres = data['data_personal']['nombres']
+        alumno.apellido_paterno = data['data_personal']['apellido_paterno']
+        alumno.apellido_materno = data['data_personal']['apellido_materno']
+        alumno.telefono = data['data_personal']['telefono']
+        alumno.email = data['data_personal']['email']
+        alumno.imagen = data['data_personal']['imagen']
+        alumno.nombre_usuario = data['data_academico']['nombre_usuario']        
+        alumno.encrypt_password(data['data_academico']['nombre_usuario'])
+        alumno.matricula = data['data_academico']['matricula']
         alumno.institucion = None
-        grado = Grado.objects(id=data['grado']).first()
-        alumno.grado = grado
+        grado = data['data_personal']['grado']
+        if grado == 'None':
+            alumno.grado = None
+        else:    
+            grado = Grado.objects(id=grado).first()
+            alumno.grado = grado
         alumno.save()
         return {'Response': 'exito', 'id': str(alumno.id)}
 
@@ -177,7 +182,7 @@ class AlumnosColegio(Resource):
         data = request.data.decode()
         data = json.loads(data)
         alumno = Alumno()
-        alumno.nombres = data['nombres']
+        alumno.nombres = data['data_personal']['nombres']
         alumno.apellido_paterno = data['apellido_paterno']
         alumno.apellido_materno = data['apellido_materno']
         alumno.telefono = data['telefono']
