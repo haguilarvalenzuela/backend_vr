@@ -130,4 +130,3 @@ class PreguntaImagen(Resource):
         imagen.save(os.path.join("./uploads/preguntas", str(id)+".jpg"))
         imagen.thumbnail((500, 500))
         imagen.save(os.path.join("./uploads/preguntas", str(id)+'_thumbnail.jpg'))
-        return {'Response': '200'},404

@@ -1,6 +1,8 @@
 from flask import Flask, Blueprint, jsonify, request,current_app, send_file
 from models.profesor import Profesor
+from models.administrador import Administrador
 from models.curso import Curso
+from models.institucion import Institucion
 from flask_restful import Api, Resource, url_for
 from libs.to_dict import mongo_to_dict
 import json
@@ -10,9 +12,44 @@ import os
 def init_module(api):
     api.add_resource(ProfesorItem, '/profesores/<id>')
     api.add_resource(Profesores, '/profesores')
-    api.add_resource(ProfesorCursos, '/profesor_cursos/<id>')
-    api.add_resource(ProfesorImagenItem, '/profesor_imagen/<id>')
-    api.add_resource(ProfesorImagenDefaultItem, '/profesor_imagen_default/<id>')
+    api.add_resource(ProfesorCursos, '/profesor/recursos/<id>')
+    api.add_resource(ProfesorImagenItem, '/profesor/imagen/<id>')
+    api.add_resource(ProfesorImagenDefaultItem, '/profesor/imagen/default/<id>')
+    api.add_resource(ProfesoresColegio, '/profesores/colegio/<id_institucion>')
+    api.add_resource(ProfesoresToken, '/profesores/token/<token>')
+    api.add_resource(ProfesorFinalizarTutorial, '/profesor/finalizar/tutorial/<id>')
+
+class ProfesorFinalizarTutorial(Resource):
+    def get(self,id):
+        profesor = Profesor.objects(id=id).first()
+        profesor.primera_vez = False
+        profesor.save()
+        return{'Response':'exito'}
+
+class ProfesoresColegio(Resource):
+    def get(self, id_institucion):
+        institucion = Institucion.objects(id = id_institucion).first()
+        profesores = []
+        for profesor in Profesor.objects(institucion = id_institucion).all():
+            profesores.append(profesor.to_dict())
+        return profesores
+
+    def post(self, id_institucion):
+        data = request.data.decode()
+        data = json.loads(data)
+        profesor = Profesor()
+        profesor.nombres = data['nombres']
+        profesor.apellido_paterno = data['apellido_paterno']
+        profesor.apellido_materno = data['apellido_materno']
+        profesor.telefono = data['telefono']
+        profesor.email = data['email']
+        profesor.nombre_usuario = data['nombre_usuario']
+        profesor.password = data['nombre_usuario']
+        institucion = Institucion.objects(id = id_institucion).first()
+        profesor.institucion = institucion.id
+        profesor.save()
+        return {'Response': 'exito' , 'id': str(profesor.id)}
+
 class ProfesorItem(Resource):
     def get(self, id):
         return json.loads(Profesor.objects(id=id).first().to_json())
@@ -26,7 +63,6 @@ class ProfesorItem(Resource):
     def put(self, id):        
         data = request.data.decode()
         data = json.loads(data)
-
         profesor = Profesor.objects(id=id).first()
         profesor.nombres = data['nombres']
         profesor.apellido_paterno = data['apellido_paterno']
@@ -34,7 +70,6 @@ class ProfesorItem(Resource):
         profesor.telefono = data['telefono']
         profesor.email = data['email']
         profesor.nombre_usuario = data['nombre_usuario']
-        profesor.encrypt_password(data['password'])
         profesor.save()
         return{'Response':'exito'}
 
@@ -53,19 +88,26 @@ class Profesores(Resource):
                 profesores.append(profesor.to_dict())
         return profesores
 
-    def post(self):
+
+class ProfesoresToken(Resource):
+    def post(self,token):
         data = request.data.decode()
         data = json.loads(data)
-        profesor = Profesor()
-        profesor.nombres = data['nombres']
-        profesor.apellido_paterno = data['apellido_paterno']
-        profesor.apellido_materno = data['apellido_materno']
-        profesor.telefono = data['telefono']
-        profesor.email = data['email']
-        profesor.nombre_usuario = data['nombre_usuario']
-        profesor.password = data['nombre_usuario']
-        profesor.save()
-        return {'Response': 'exito' , 'id': str(profesor.id)}
+        token = token
+        if Administrador.load_from_token(token) != None:
+            profesor = Profesor()
+            profesor.nombres = data['nombres']
+            profesor.apellido_paterno = data['apellido_paterno']
+            profesor.apellido_materno = data['apellido_materno']
+            profesor.telefono = data['telefono']
+            profesor.email = data['email']
+            profesor.nombre_usuario = data['nombre_usuario']
+            profesor.encrypt_password(data['nombre_usuario'])
+            profesor.save()
+            return {'Response': 'exito' , 'id': str(profesor.id)}
+        else:
+            return {'Response': 'fracaso'}
+        
 
 class ProfesorImagenItem(Resource):
     def post(self,id):

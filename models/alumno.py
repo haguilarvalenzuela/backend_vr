@@ -93,4 +93,3 @@ class Alumno(gj.Document, UserMixin):
         except BadSignature:
             # the token ist'n valid
             return None
-        return None

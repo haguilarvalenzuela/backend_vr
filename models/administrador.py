@@ -49,7 +49,7 @@ class Administrador(gj.Document, UserMixin):
         }
 
     def encrypt_password(self, password_to_encrypt):
-        self.password = generate_password_hash(password_to_encrypt)
+    	self.password = generate_password_hash(password_to_encrypt)
 
     def check_password(self, password_to_check):
         return check_password_hash(self.password, str(password_to_check).strip())

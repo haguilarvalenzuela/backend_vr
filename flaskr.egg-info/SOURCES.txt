@@ -42,3 +42,4 @@ resources/login.py
 resources/portal.py
 resources/profesor.py
 resources/seccion.py
+resources/vrkids.py

@@ -6,7 +6,6 @@ import random
 import string
 
 from flaskr import api
-#from models.administrador import Administrador
 from models.alumno import Alumno
 
 @pytest.fixture

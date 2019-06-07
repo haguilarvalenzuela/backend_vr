@@ -47,6 +47,7 @@ def init_modules(app, api):
     categoria.init_module(api)
     vrkids.init_module(api)
     administrador.AdminGenerate()
+    
 
 init_modules(app, api)
 

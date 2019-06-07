@@ -7,7 +7,6 @@ class Asignatura(gj.Document):
     nombre = db.StringField(verbose_name="Nombre Asignatura", max_length=200)
     institucion = db.ReferenceField(Institucion)
     activo = db.BooleanField(default=True)
-
     meta = {'strict': False}
 
     def __str__(self):
@@ -15,6 +14,7 @@ class Asignatura(gj.Document):
 
     def to_dict(self):
         return {
-                "nombre": self.nombre,
-                "institucion": self.institucion.nombre,
-                "activo": self.activo}
+            "id": str(self.id),
+            "nombre": self.nombre,
+            "activo": self.activo
+        }
