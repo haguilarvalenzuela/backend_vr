@@ -12,7 +12,7 @@ import json
 def init_module(api):
     api.add_resource(AdministradorItem, '/administradores/<id>')
     api.add_resource(Administradores, '/administradores')
-    api.add_resource(AdministradorFinalizarTutorial, '/administrador_finalizar_tutorial/<id>')
+    api.add_resource(AdministradorFinalizarTutorial, '/administrador/finalizar/tutorial/<id>')
     api.add_resource(AdministradorToken, '/administrador')
 
 def AdminGenerate():

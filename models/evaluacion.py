@@ -11,17 +11,17 @@ class Evaluacion(gj.Document):
     institucion = db.ReferenceField(Institucion)
     curso = db.ReferenceField(Curso)
     respuestas = db.ListField(db.EmbeddedDocumentField(Respuesta))
-    acierto = db.IntField()
+    acierto = db.IntField(default=0)
     meta = {'strict': False}
 
     def to_dict(self):
-        respuestas = []
+        contenidos_respuesta = []
         for respuesta in self.respuestas:
-            respuestas.append(respuesta.to_dict())
+            contenidos_respuesta.append(respuesta.to_dict())
         return{
             "id": str(self.id),
-            "alumno": self.alumno.to_dict,
+            "alumno": self.alumno.to_dict(),
             "curso": self.curso.to_dict(),
-            "respuestas": respuestas,
+            "respuestas": contenidos_respuesta,
             "acierto": self.acierto
         }

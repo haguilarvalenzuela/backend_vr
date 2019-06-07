@@ -24,6 +24,7 @@ class Inscripcion(gj.Document):
         for historial in self.historial:
             historiales.append(historial.to_dict())
         return{
+            "id": str(self.id),
             "alumno": self.alumno.to_dict(),
             "curso": self.curso.to_dict(),
             "estado": self.estado,

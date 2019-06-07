@@ -9,7 +9,7 @@ import json
 
 def init_module(api):
     api.add_resource(Categorias, '/categorias/<id>')
-    api.add_resource(CategoriaImagenItem, '/categoria_imagen/<id>')
+    api.add_resource(CategoriaImagenItem, '/categoria/imagen/<id>')
     api.add_resource(CategoriaImagenDefaultItem, '/categoria_imagen_default/<id>')
 
 class Categorias(Resource):

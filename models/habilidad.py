@@ -3,10 +3,8 @@ from datetime import datetime
 from models.institucion import Institucion
 import mongoengine_goodjson as gj
 
-class Asignatura(gj.Document):
-    nombre = db.StringField(verbose_name="Nombre Asignatura", max_length=200)
-    institucion = db.ReferenceField(Institucion)
-    activo = db.BooleanField(default=True)
+class Habilidad(gj.Document):
+    nombre = db.StringField(verbose_name="Nombre Habilidad", max_length=200)
     meta = {'strict': False}
 
     def __str__(self):
@@ -15,6 +13,5 @@ class Asignatura(gj.Document):
     def to_dict(self):
         return {
             "id": str(self.id),
-            "nombre": self.nombre,
-            "activo": self.activo
+            "nombre": self.nombre
         }

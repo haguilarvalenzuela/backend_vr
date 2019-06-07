@@ -11,9 +11,24 @@ import json
 def init_module(api):
     api.add_resource(InscripcionItem, '/inscripciones/<id>')
     api.add_resource(Inscripciones, '/inscripciones')
-    api.add_resource(InscripcionCurso, '/inscripciones_curso/<id>')
-    api.add_resource(InscripcionesAlumno, '/inscripciones_alumno/<id>')
+    api.add_resource(InscripcionCurso, '/inscripciones/recurso/<id>')
+    api.add_resource(InscripcionesAlumno, '/inscripciones/alumno/<id>')
+    api.add_resource(InscripcionesCursoAceptar, '/aceptar/inscripciones/recurso/<id>')
 
+class InscripcionesCursoAceptar(Resource):
+    def post(self,id):
+        curso = Curso.objects(id=id).first()
+        for inscripcion in Inscripcion.objects(curso=curso.id).all():
+            if inscripcion.estado == "ENVIADA":
+                alumno = Alumno.objects(id=inscripcion.alumno.id).first()
+                curso.alumnos.append(alumno)
+                historial = Historial()
+                historial.data = "Solcitud aceptada por profesor "+curso.profesor.nombres+" "+curso.profesor.apellido_paterno+" "+curso.profesor.apellido_materno
+                inscripcion.estado= "ACEPTADA"
+                inscripcion.historial.append(historial)
+                inscripcion.save()
+                curso.save()
+        return {"Response":"exito"}                
 
 class InscripcionItem(Resource):
     def get(self, id):
@@ -83,8 +98,8 @@ class InscripcionesAlumno(Resource):
                     })
             response.append({
                 'id': str(inscripcion.id),
-                'curso': inscripcion.curso.nombre,
-                'profesor': inscripcion.curso.profesor.nombres,
+                'curso': inscripcion.curso.to_dict(),
+                'profesor': inscripcion.curso.profesor.to_dict(),
                 'estado': inscripcion.estado,
                 'historial': historial
                 })
