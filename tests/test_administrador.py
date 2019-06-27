@@ -21,9 +21,9 @@ def client():
 def test_get_administradores(client):
     rv = client.get('/administradores')
     if rv._status_code == 200:
-        assert 1
+        assert True
     else:
-        assert 0
+        assert False
 
 def test_get_administrador(client):
     administrador = Administrador.objects().first()
@@ -31,7 +31,10 @@ def test_get_administrador(client):
         assert True
     else:
         rv = client.get('/administradores/'+str(administrador.id))
-        assert True
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
 
 def test_get_admin_token(client):
 
