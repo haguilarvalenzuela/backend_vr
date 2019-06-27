@@ -51,7 +51,11 @@ def test_post_alumno(client):
     data = json.dumps(data)
     data = data.encode()
     rv = client.post('/alumnos', data=data)
-    assert rv.data
+    
+    if rv._status_code == 200:
+        assert True
+    else:
+        assert False
 
 def test_get_alumnos(client):
 
