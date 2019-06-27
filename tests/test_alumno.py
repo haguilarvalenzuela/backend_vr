@@ -69,20 +69,23 @@ def test_get_alumno(client):
     alumno = Alumno.objects().first()
     if alumno == None:
         assert True
-    rv = client.get('/alumnos/'+str(alumno.id))
-    if rv._status_code == 200:
-        assert True
     else:
-        assert False
-
+        rv = client.get('/alumnos/'+str(alumno.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
+            
 def test_get_alumnos_curso(client):
-
-    curso = Curso.objects().first()
-    if(curso==None):
+    curso = Grado.objects().first()
+    if curso == None:
         assert True
     else:
-        rv = client.get('/alumnos_curso/'+str(curso.id))
-        assert True
+        rv = client.get('/alumnos/curso/'+str(curso.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
 
 def test_get_alumnos_grado(client):
     alumno = Alumno.objects().first()
