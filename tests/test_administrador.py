@@ -20,7 +20,10 @@ def client():
 
 def test_get_administradores(client):
     rv = client.get('/administradores')
-    assert rv.data
+    if rv._status_code == 200:
+        assert 1
+    else:
+        assert 0
 
 def test_get_administrador(client):
     administrador = Administrador.objects().first()
