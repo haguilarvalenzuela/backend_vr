@@ -68,9 +68,12 @@ def test_get_alumno(client):
 
     alumno = Alumno.objects().first()
     if alumno == None:
-        return 'No hay alumnos'
+        assert True
     rv = client.get('/alumnos/'+str(alumno.id))
-    assert rv.data
+    if rv._status_code == 200:
+        assert True
+    else:
+        assert False
 
 def test_get_alumnos_curso(client):
 
