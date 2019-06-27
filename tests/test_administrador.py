@@ -76,4 +76,7 @@ def test_put_administrador(client):
         data = json.dumps(data)
         data = data.encode()
         rv = client.put('/administradores/'+str(administrador.id), data=data)
-        assert True
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
