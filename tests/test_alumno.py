@@ -58,9 +58,11 @@ def test_post_alumno(client):
         assert False
 
 def test_get_alumnos(client):
-
-	rv = client.get('/alumnos')
-	assert rv.data
+    rv = client.get('/alumnos')
+    if rv._status_code == 200:
+        assert True
+    else:
+        assert False
 
 def test_get_alumno(client):
 
