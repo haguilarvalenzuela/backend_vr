@@ -53,8 +53,11 @@ def test_get_finalizar_tutorial_admin(client):
         if administrador == None:
             assert True
         else:
-            rv = client.get('/administrador_finalizar_tutorial/'+str(administrador.id))
-            assert True
+            rv = client.get('/administrador/finalizar/tutorial/'+str(administrador.id))
+            if rv._status_code == 200:
+                assert True
+            else:
+                assert False
         
 def test_put_administrador(client):
     administrador = Administrador.objects().first()
