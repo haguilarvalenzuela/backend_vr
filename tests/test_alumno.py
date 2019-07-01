@@ -75,7 +75,7 @@ def test_get_alumno(client):
             assert True
         else:
             assert False
-            
+
 def test_get_alumnos_curso(client):
     curso = Grado.objects().first()
     if curso == None:
@@ -87,15 +87,7 @@ def test_get_alumnos_curso(client):
         else:
             assert False
 
-def test_get_alumnos_grado(client):
-    alumno = Alumno.objects().first()
-    if(alumno==None):
-        assert True
-    else:
-        rv = client.get('')
-        assert rv.data
-
-def test_get_alumno_cursos(client):
+def test_get_alumno_recursos(client):
 
     grado = Grado.objects().first()
     if(grado==None):
