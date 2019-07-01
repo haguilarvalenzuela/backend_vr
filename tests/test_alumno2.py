@@ -4,6 +4,7 @@ import json
 import pytest
 from io import BytesIO
 from pathlib import Path
+from os.path import dirname, abspath
 
 from flaskr import api
 from models.alumno import Alumno
@@ -163,9 +164,9 @@ def test_delete_alumno_recurso(client):
 def test_post_alumno_imagen(client):
     
     with api.app.app_context():
-        directory_root = Path().resolve()
-        #print('asdas')
-        #print(str(directory_root))
+
+        directory_root = dirname(dirname(abspath(__file__)))
+        #directory_root = Path().resolve()
         path_img = os.path.join(str(directory_root),
                                 "flaskr/uploads/categorias/default.jpg")
         

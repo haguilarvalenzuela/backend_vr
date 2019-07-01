@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from PIL import Image
 import os
+from os.path import dirname, abspath
 
 def init_module(api):
     api.add_resource(AlumnoItem, '/alumnos/<id>')
@@ -209,8 +210,8 @@ class AlumnoImagenItem(Resource):
         #########
         # Se usa el siguiente os.path.join para los tests
         #########
-        directory_root = Path().resolve()
-        #print(directory_root)
+        directory_root = dirname(dirname(abspath(__file__)))
+        #directory_root = Path().resolve()
         upload_directory = os.path.join(str(directory_root), "flaskr/uploads")
 
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
