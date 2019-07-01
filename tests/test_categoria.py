@@ -25,14 +25,21 @@ def test_get_categorias(client):
 		assert True
 	else:
 		rv = client.get('/categorias/'+str(institucion.id))
-		assert rv.data
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
 def test_get_imagen_categoria(client):
-
-	try:
-		rv = client.get('/categoria_imagen/'+'default')
-	except Exception as e:
+	categoria = Categoria.objects().first()
+	if categoria == None:
 		assert True
+	else:
+		rv = client.get('/categoria/imagen/'+str(categoria.id))
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
 	
 def test_get_imagen_default_categoria(client):
@@ -41,4 +48,7 @@ def test_get_imagen_default_categoria(client):
 		assert True
 	else:
 		rv = client.get('/categoria_imagen_default/'+str(categoria.id))
-		assert True
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
