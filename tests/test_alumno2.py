@@ -42,6 +42,31 @@ def test_delete_alumno(client):
         else:
             assert False
 
+def test_put_alumno(client):
+    alumno = Alumno.objects().first()
+    institucion = Institucion.objects().first()
+    if alumno == None or institucion == None:
+        assert True
+    else:
+        data = {
+            'nombres': 'nombre prueba',
+            'apellido_paterno': 'paterno',
+            'apellido_materno': 'materno',
+            'email': 'prueba@prueba.prueba',
+            'telefono': '+560',
+            'nombre_usuario': 'usuario_prueba',
+            'password': 'asd',
+            'matricula': 'matricula',
+            'institucion': str(institucion.id)
+        }
+        data = json.dumps(data)
+        data = data.encode(data)
+        rv = client.put('/alumnos/'+str(alumno.id), data=data)
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
+
 def test_get_alumnos(client):
     rv = client.get('/alumnos')
     if rv._status_code == 200:
