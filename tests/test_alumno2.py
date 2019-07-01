@@ -3,13 +3,13 @@ import tempfile
 import json
 import pytest
 from io import BytesIO
+from pathlib import Path
 
 from flaskr import api
 from models.alumno import Alumno
 from models.curso import Curso
 from models.grado import Grado
 from models.institucion import Institucion
-from os.path import dirname, abspath
 
 @pytest.fixture
 def client():
@@ -163,8 +163,11 @@ def test_delete_alumno_recurso(client):
 def test_post_alumno_imagen(client):
     
     with api.app.app_context():
-        directory_root = dirname(dirname(abspath(__file__)))
-        path_img = os.path.join(directory_root, "flaskr/uploads/categorias/default.jpg")
+        directory_root = Path().resolve().parent
+        #print('asdas')
+        #print(str(directory_root))
+        path_img = os.path.join(str(directory_root),
+                                "flaskr/uploads/categorias/default.jpg")
         
         with open(path_img, 'rb') as img_open:
             img = BytesIO(img_open.read())
