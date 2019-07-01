@@ -1,9 +1,9 @@
 languaje: python
 python:
   - "3.5"
-install:
-  - sudo pip install -r requirements.txt
-  - sudo pip install .
+#install:
+#  - sudo pip install -r requirements.txt
+#  - sudo pip install .
 script:
   - sudo apt-get install -y python-logilab-common
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -13,6 +13,8 @@ script:
   - pip3 install virtualenv
   - virtualenv env
   - source env/bin/activate
+  - pip3 install -r requirements.txt
+  #- pip3 install .
   - sudo apt-get install -y mongodb-org
   - sudo service mongod start
   - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr
