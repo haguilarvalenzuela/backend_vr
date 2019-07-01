@@ -195,3 +195,14 @@ def test_get_alumno_imagen(client):
             assert True
         else:
             assert False
+
+def test_get_alumno_imagen_default(client):
+    alumno = Alumno.objects().first()
+    if alumno == None:
+        assert True
+    else:
+        rv = client.get('/alumno/imagen/default/'+str(alumno.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
