@@ -1,7 +1,7 @@
-dist: xenial
+dist: trusty
 languaje: python
 python:
-  - "3.7"
+  - "3.5"
 before_install:
   - sudo apt-get install python3-pip
 install:
