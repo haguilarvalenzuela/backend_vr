@@ -206,3 +206,14 @@ def test_get_alumno_imagen_default(client):
             assert True
         else:
             assert False
+
+def test_get_alumnos_curso(client):
+    curso = Grado.objects().first()
+    if curso == None:
+        assert True
+    else:
+        rv = client.get('/alumnos/curso/'+str(curso.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
