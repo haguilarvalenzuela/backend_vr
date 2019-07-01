@@ -209,7 +209,7 @@ class AlumnoImagenItem(Resource):
         #########
         # Se usa el siguiente os.path.join para los tests
         #########
-        directory_root = Path().resolve().parent
+        directory_root = Path().resolve()
         #print(directory_root)
         upload_directory = os.path.join(str(directory_root), "flaskr/uploads")
 

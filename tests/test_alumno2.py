@@ -163,7 +163,7 @@ def test_delete_alumno_recurso(client):
 def test_post_alumno_imagen(client):
     
     with api.app.app_context():
-        directory_root = Path().resolve().parent
+        directory_root = Path().resolve()
         #print('asdas')
         #print(str(directory_root))
         path_img = os.path.join(str(directory_root),
