@@ -3,7 +3,6 @@ import tempfile
 import json
 import pytest
 from io import BytesIO
-from pathlib import Path
 from os.path import dirname, abspath
 
 from flaskr import api
@@ -166,7 +165,6 @@ def test_post_alumno_imagen(client):
     with api.app.app_context():
 
         directory_root = dirname(dirname(abspath(__file__)))
-        #directory_root = Path().resolve()
         path_img = os.path.join(str(directory_root),
                                 "flaskr/uploads/categorias/default.jpg")
         
@@ -186,7 +184,7 @@ def test_post_alumno_imagen(client):
                 else:
                     assert False
 
-""" def test_get_alumno_imagen(client):
+def test_get_alumno_imagen(client):
 
     alumno = Alumno.objects().first()
     if alumno == None:
@@ -196,4 +194,4 @@ def test_post_alumno_imagen(client):
         if rv._status_code == 200:
             assert True
         else:
-            assert False """
+            assert False

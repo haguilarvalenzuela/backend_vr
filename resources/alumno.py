@@ -10,7 +10,6 @@ from flask_restful import Api, Resource, url_for
 from libs.to_dict import mongo_to_dict
 from bson import ObjectId
 import json
-from pathlib import Path
 from PIL import Image
 import os
 from os.path import dirname, abspath
@@ -211,7 +210,6 @@ class AlumnoImagenItem(Resource):
         # Se usa el siguiente os.path.join para los tests
         #########
         directory_root = dirname(dirname(abspath(__file__)))
-        #directory_root = Path().resolve()
         upload_directory = os.path.join(str(directory_root), "flaskr/uploads")
 
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
@@ -236,7 +234,8 @@ class AlumnoImagenItem(Resource):
         #########
         # Se usa el siguiente os.path.join para los tests
         #########
-        upload_directory = os.path.join(current_app.root_path, "uploads/alumnos")
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(directory_root, "flaskr/uploads/alumnos")
         image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
         return send_file(image_path)
 
