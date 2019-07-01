@@ -20,19 +20,28 @@ def client():
 
 def test_get_asignatura(client):
 	asignatura = Asignatura.objects().first()
-	if(asignatura==None):
+	if asignatura==None :
 		assert True
 	else:
 		rv = client.get('/asignatura/'+str(asignatura.id))
-		assert True
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
 def test_get_asignaturas(client):
 	rv = client.get('/asignaturas')
-	assert True
+	if rv._status_code == 200:		
+		assert True
+	else:
+		assert False
 
 def test_get_asignaturas_detalles(client):
-	rv = client.get('/asignaturas_detalle')
-	assert True
+	rv = client.get('/asignaturas/detalle')
+	if rv._status_code == 200:
+		assert True
+	else:
+		assert False
 
 def test_post_asignatura(client):
 	institucion = Institucion.objects().first()
@@ -46,7 +55,10 @@ def test_post_asignatura(client):
 		data = json.dumps(data)
 		data = data.encode()
 		rv = client.post('/asignaturas', data=data)
-		assert True
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
 def test_put_asignatura(client):
 	asignatura = Asignatura.objects().first()
@@ -61,4 +73,34 @@ def test_put_asignatura(client):
 		data = json.dumps(data)
 		data = data.encode()
 		rv = client.put('/asignaturas/'+str(asignatura.id), data=data)
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
+
+def test_delete_asignatura(client):
+	asignatura = Asignatura.objects().first()
+	if asignatura == None:
 		assert True
+	else:
+		rv = client.delete('/asignaturas/'+str(asignatura.id))
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
+
+def test_post_asignaturas(client):
+	institucion = Institucion.objects().first()
+	if institucion == None:
+		assert True
+	else:
+
+		data = {
+			'nombre': 'nombre',
+					'institucion': str(institucion.id)
+		}
+		rv = client.post('/asignaturas', data=data)
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
