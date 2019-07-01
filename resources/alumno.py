@@ -210,7 +210,7 @@ class AlumnoImagenItem(Resource):
         # Se usa el siguiente os.path.join para los tests
         #########
         directory_root = dirname(dirname(abspath(__file__)))
-        upload_directory = os.path.join(str(directory_root), "flaskr/uploads")
+        upload_directory = os.path.join(str(directory_root), "flaskr/uploads/alumnos")
 
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
         image_path = os.path.join(upload_directory, "%s.jpg" % str(id))

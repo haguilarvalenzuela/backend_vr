@@ -202,7 +202,6 @@ def test_get_alumno_imagen_default(client):
     if alumno == None:
         assert True
     else:
-        test_post_alumno_imagen(client)
         rv = client.get('/alumno/imagen/default/'+str(alumno.id))
         if rv._status_code == 200:
             assert True
