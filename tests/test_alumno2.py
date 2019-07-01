@@ -162,7 +162,8 @@ def test_delete_alumno_recurso(client):
 def test_post_alumno_imagen(client):
     
     with api.app.app_context():
-        path_img = os.path.join('../flakr',"uploads/categorias/default.jpg")
+        print(os.getcwd())
+        path_img = os.path.join(os.getcwd(), "../flaskr/uploads/categorias/default.jpg")
         with open(path_img, 'rb') as img_open:
             img = BytesIO(img_open.read())
             
