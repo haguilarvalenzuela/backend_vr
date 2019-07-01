@@ -14,4 +14,4 @@ script:
   - export FLASK_APP=/home/travis/build/haguilarvalenzuela/backend_vr
   - export FLASK_ENV=development
   - cd /home/travis/build/haguilarvalenzuela/backend_vr
-  - pytest -v
+  - python3 -m pytest -v
