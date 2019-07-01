@@ -163,6 +163,7 @@ def test_post_alumno_imagen(client):
     
     with api.app.app_context():
         path_img = os.path.join(api.app.root_path,"uploads/categorias/default.jpg")
+        print(path_img)
         with open(path_img, 'rb') as img_open:
             img = BytesIO(img_open.read())
             
@@ -178,3 +179,15 @@ def test_post_alumno_imagen(client):
                     assert True
                 else:
                     assert False
+
+def test_get_alumno_imagen(client):
+
+    alumno = Alumno.objects().first()
+    if alumno == None:
+        assert True
+    else:
+        rv = client.get('/alumno/imagen/'+str(alumno.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False

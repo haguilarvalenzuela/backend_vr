@@ -199,8 +199,6 @@ class AlumnosColegio(Resource):
 
 class AlumnoImagenItem(Resource):
     def post(self,id):
-        print(current_app.root_path)
-
         #########
         # Se usa el siguiente os.path.join para la aplicación
         #########
@@ -225,20 +223,18 @@ class AlumnoImagenItem(Resource):
         return {'Response': 'exito'}
     
     def get(self,id):
-        with api.app.app_context():
-            #########
-            # Se usa el siguiente os.path.join para la aplicación
-            #########
-            # upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"),
-            #                                "alumnos")
+        #########
+        # Se usa el siguiente os.path.join para la aplicación
+        #########
+        # upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"),
+        #                                "alumnos")
 
-            #########
-            # Se usa el siguiente os.path.join para los tests
-            #########
-            upload_directory = os.path.join(
-                api.app.root_path, "uploads/alumnos")
-            image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
-            return send_file(image_path)
+        #########
+        # Se usa el siguiente os.path.join para los tests
+        #########
+        upload_directory = os.path.join(current_app.root_path, "uploads/alumnos")
+        image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
+        return send_file(image_path)
 
 class AlumnoImagenZoom(Resource):
     def get(self,id):
