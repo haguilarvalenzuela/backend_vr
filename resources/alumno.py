@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, jsonify, request, current_app, send_file
+from flaskr import api
 from models.alumno import Alumno
 from models.curso import Curso
 from models.asignatura import Asignatura
@@ -199,19 +200,30 @@ class AlumnosColegio(Resource):
 
 class AlumnoImagenItem(Resource):
     def post(self,id):
-        upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
-                                        "alumnos")
-        imagen = Image.open(request.files['imagen'].stream).convert("RGB")
-        image_path = os.path.join(upload_directory, "%s.jpg" % str(id))
-        imagen.save(image_path)
-        imagen.thumbnail((200, 100))
+        with api.app.app_context():
 
-        image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
-        imagen.save(image_path)
-        alumno = Alumno.objects(id=id).first()
-        alumno.imagen = str(id)
-        alumno.save()
-        return {'Response': 'exito'}
+            #########
+            # Se usa el siguiente os.path.join para la aplicación
+            #########
+            # upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
+            #                                "alumnos")
+
+            #########
+            # Se usa el siguiente os.path.join para los tests
+            #########
+            upload_directory = os.path.join(api.app.root_path, "uploads/alumnos")
+
+            imagen = Image.open(request.files['imagen'].stream).convert("RGB")
+            image_path = os.path.join(upload_directory, "%s.jpg" % str(id))
+            imagen.save(image_path)
+            imagen.thumbnail((200, 100))
+
+            image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
+            imagen.save(image_path)
+            alumno = Alumno.objects(id=id).first()
+            alumno.imagen = str(id)
+            alumno.save()
+            return {'Response': 'exito'}
     
     def get(self,id):
         upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 

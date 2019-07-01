@@ -2,6 +2,7 @@ import os
 import tempfile
 import json
 import pytest
+from io import BytesIO
 
 from flaskr import api
 from models.alumno import Alumno
@@ -157,3 +158,23 @@ def test_delete_alumno_recurso(client):
             assert True
         else:
             assert False
+
+def test_post_alumno_imagen(client):
+    
+    with api.app.app_context():
+        path_img = os.path.join(api.app.root_path,"uploads/categorias/default.jpg")
+        with open(path_img, 'rb') as img_open:
+            img = BytesIO(img_open.read())
+            
+            alumno = Alumno.objects().first()
+            if alumno == None:
+                assert True
+            else:
+                data = {
+                    'imagen': (img, 'img.jpg')
+                }
+                rv = client.post('/alumno/imagen/'+str(alumno.id), content_type='multipart/form-data',data=data)
+                if rv._status_code == 200:
+                    assert True
+                else:
+                    assert False

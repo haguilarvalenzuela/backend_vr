@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, current_app
 from flask_restful import reqparse, abort, Api, Resource
 from flask_cors import CORS
 from flask_login import LoginManager
