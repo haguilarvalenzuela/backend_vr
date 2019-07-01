@@ -217,3 +217,15 @@ def test_get_alumnos_curso(client):
             assert True
         else:
             assert False
+
+
+def test_get_alumno_imagen_zoom(client):
+    alumno = Alumno.objects().first()
+    if alumno == None:
+        assert True
+    else:
+        rv = client.get('/imagen/zoom/'+str(alumno.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
