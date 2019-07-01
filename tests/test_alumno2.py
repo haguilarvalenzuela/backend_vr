@@ -139,7 +139,20 @@ def test_post_alumno_recurso(client):
     if curso == None or alumno == None:
         assert True
     else:
-        rv = client.post('/alumno/recurso/nombre_usuario/id_curso')
+        rv = client.post('/alumno/recurso/'+str(alumno.nombre_usuario)+'/'+str(curso.id))
+        if rv._status_code == 200:
+            assert True
+        else:
+            assert False
+
+def test_delete_alumno_recurso(client):
+    curso = Curso.objects().first()
+    alumno = Alumno.objects().first()
+
+    if curso == None or alumno == None:
+        assert True
+    else:
+        rv = client.delete('/alumno/recurso/'+str(alumno.nombre_usuario)+'/'+str(curso.id))
         if rv._status_code == 200:
             assert True
         else:
