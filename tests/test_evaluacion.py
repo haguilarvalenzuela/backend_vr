@@ -19,13 +19,19 @@ def client():
 
 def test_get_evaluaciones(client):
 	rv = client.get('/evaluaciones')
-	assert True
+	if rv._status_code == 200:
+		assert True
+	else:
+		assert False
 
 def test_get_evaluacion_id(client):
 	evaluacion = Evaluacion.objects().first()
-	if(evaluacion==None):
+	if evaluacion == None:
 		assert True
 	else:
 		rv = client.get('/evaluaciones/'+str(evaluacion.id))
-		assert True
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
