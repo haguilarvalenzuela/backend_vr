@@ -30,7 +30,10 @@ def test_get_curso(client):
 		assert True
 	else:
 		rv = client.get('/cursos/'+str(curso.id))
-		assert True
+		if rv._status_code == 200:
+			assert True
+		else:
+			assert False
 
 def test_get_cursos(client):
 	rv = client.get('/cursos')
@@ -169,3 +172,6 @@ def test_put_curso(client):
 		}
 		rv = client.put('/cursos', data=data)
 		assert True
+
+#def test_delete_curso(client):
+	
