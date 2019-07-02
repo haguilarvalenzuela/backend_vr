@@ -8,6 +8,7 @@ from libs.auth import token_required
 import json
 from PIL import Image
 import os
+from os.path import dirname, abspath
 
 def init_module(api):
   api.add_resource(Secciones,'/secciones/<id>')
@@ -109,8 +110,13 @@ class SeccionesColegio(Resource):
 
 class SeccionImagenItem(Resource):
     def post(self,id):
-        upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
-                                        "secciones")
+        #upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
+        #                                "secciones")
+
+        #Para los test
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(
+            str(directory_root), "flaskr/uploads/secciones")
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
         image_path = os.path.join(upload_directory, "%s.jpg" % str(id))
         imagen.save(image_path)
@@ -124,15 +130,24 @@ class SeccionImagenItem(Resource):
         return {'Response': 'exito'}
     
     def get(self,id):
-        upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
-                        "secciones")
+        #upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
+        #                "secciones")
+
+        #Para los test
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(
+            str(directory_root), "flaskr/uploads/secciones")
         image_path = os.path.join(upload_directory, "%s_thumbnail.jpg" % str(id))
         return send_file(image_path)
 
 class SeccionImagenOriginal(Resource):
     def get(self,id):
-        upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
-                        "secciones")
+        #upload_directory = os.path.join(current_app.config.get("UPLOAD_FOLDER", "uploads"), 
+        #                "secciones")
+        #Para los test
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(
+            str(directory_root), "flaskr/uploads/secciones")
         image_path = os.path.join(upload_directory, "%s.jpg" % str(id))
         return send_file(image_path)
 

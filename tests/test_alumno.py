@@ -160,10 +160,8 @@ def test_delete_alumno_recurso(client):
         else:
             assert False
 
-def test_post_alumno_imagen(client):
-    
+def test_post_alumno_imagen(client):    
     with api.app.app_context():
-
         directory_root = dirname(dirname(abspath(__file__)))
         path_img = os.path.join(str(directory_root),
                                 "flaskr/uploads/categorias/default.jpg")

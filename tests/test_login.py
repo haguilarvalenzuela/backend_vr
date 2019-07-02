@@ -38,10 +38,7 @@ def test_post_logout(client):
 def test_post_login_app(client):
 	data = dict(tipo='ADMINISTRADOR', email='admin@admin.cl', password='pass')
 	data = json.dumps(data)
-	#data = data.encode()
-
 	rv = client.post('/login/app', content_type='application/json', data=data)
-	print(rv._status_code)
 	if rv._status_code == 200 or rv._status_code == 403:
 		assert True
 	else:
