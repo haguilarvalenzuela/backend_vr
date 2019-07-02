@@ -132,6 +132,8 @@ def test_put_recursos(client):
             'id': str(curso.id),
             'data': data
         }
+        data_put = json.dumps(data_put)
+        data_put = data_put.encode()
         rv = client.put('/cursos', data=data_put)
         if rv._status_code == 200:
             assert True
