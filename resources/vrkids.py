@@ -11,6 +11,9 @@ from libs.auth import token_required
 from functools import wraps
 from bson.objectid import ObjectId
 import json
+import os
+from PIL import Image
+from os.path import dirname, abspath
 
 def init_module(api):
     api.add_resource(CursoCargar, '/recursos/<id_recurso>')
@@ -126,7 +129,12 @@ class PreguntaImagen(Resource):
         return send_file('uploads/preguntas/'+id+'_thumbnail.jpg')
 
     def post(self,id):
+
+         #Para los test
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(
+            str(directory_root), "flaskr/uploads/preguntas")
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
-        imagen.save(os.path.join("./uploads/preguntas", str(id)+".jpg"))
+        imagen.save(os.path.join(upload_directory, str(id)+".jpg"))
         imagen.thumbnail((500, 500))
-        imagen.save(os.path.join("./uploads/preguntas", str(id)+'_thumbnail.jpg'))
+        imagen.save(os.path.join(upload_directory, str(id)+'_thumbnail.jpg'))
