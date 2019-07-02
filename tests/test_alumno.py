@@ -172,6 +172,7 @@ def test_post_alumno_imagen(client):
             img = BytesIO(img_open.read())
             
             alumno = Alumno.objects().first()
+            
             if alumno == None:
                 assert True
             else:

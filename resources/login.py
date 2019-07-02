@@ -105,7 +105,6 @@ class LoginApp(Resource):
         email = args.get("email")
         passwd = args.get("password")
         tipo = args.get("tipo")
-
         user = None
         if tipo == 'ALUMNO':
             user = Alumno.objects(email=email).first()

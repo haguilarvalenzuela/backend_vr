@@ -26,8 +26,29 @@ def test_post_login(client):
 	data = json.dumps(data)
 	data = data.encode()
 	rv = client.post('/login', data=data)
-	assert True
+	if rv._status_code == 200:
+		assert True
+	else:
+		assert False
 
 def test_post_logout(client):
 	rv = client.post('/logout')
-	assert True
+	if rv._status_code == 200:
+		assert True
+	else:
+		assert False
+
+def test_post_login_app(client):
+	data = {
+		'tipo': 'ADMINISTRADOR',
+		'email': 'admin@admin.cl',
+		'password': 'pass'
+	}
+
+	data = json.dumps(data)
+	data = data.encode()
+	rv = client.post('/login/app/',data=data)
+	if rv._status_code == 200 or rv._status_code == 403:
+		assert True
+	else:
+		assert False
