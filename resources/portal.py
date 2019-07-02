@@ -16,5 +16,4 @@ class PortalItem(Resource):
 
 class Portales(Resource):
     def get(self):
-        print(Portal.objects().all().to_json())
         return json.loads(Portal.objects().all().to_json())
