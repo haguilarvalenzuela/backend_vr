@@ -8,6 +8,7 @@ from libs.to_dict import mongo_to_dict
 import json
 from PIL import Image
 import os
+from os.path import dirname, abspath
 
 def init_module(api):
     api.add_resource(ProfesorItem, '/profesores/<id>')
@@ -111,10 +112,16 @@ class ProfesoresToken(Resource):
 
 class ProfesorImagenItem(Resource):
     def post(self,id):
+        #########
+        # Se usa el siguiente os.path.join para los tests
+        #########
+        directory_root = dirname(dirname(abspath(__file__)))
+        upload_directory = os.path.join(str(directory_root), "flaskr/uploads/profesores")
+
         imagen = Image.open(request.files['imagen'].stream).convert("RGB")
-        imagen.save(os.path.join("./uploads/profesores", str(id)+".jpg"))
+        imagen.save(os.path.join(upload_directory, str(id)+".jpg"))
         imagen.thumbnail((200, 100))
-        imagen.save(os.path.join("./uploads/profesores", str(id)+'_thumbnail.jpg'))
+        imagen.save(os.path.join(upload_directory, str(id)+'_thumbnail.jpg'))
         profesor = Profesor.objects(id=id).first()
         profesor.imagen = str(id)
         profesor.save()

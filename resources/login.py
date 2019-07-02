@@ -73,6 +73,7 @@ class Login(Resource):
         tipo = args.get("tipo")
         recursos = []
         user = None
+        
         if tipo == 'ALUMNO':
             user = Alumno.objects(email=email).first()
             for recurso in Curso.objects(alumnos__in=[user]).all(): 
@@ -83,6 +84,7 @@ class Login(Resource):
             user = Profesor.objects(email=email).first()
             for recurso in Curso.objects(profesor=user).all():
                 recursos.append(recurso.to_dict())
+        
         if user and user.activo and user.check_password(passwd):
             return {'respuesta':
                         {'id': str(user.id)},
@@ -90,6 +92,7 @@ class Login(Resource):
                          'token': str(user.get_token()),
                          'recursos': recursos
                         }    
+        print('testingggg')
         return {'respuesta': 'no_existe'}, 401
 
 class LoginApp(Resource):

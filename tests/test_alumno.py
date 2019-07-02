@@ -62,7 +62,7 @@ def test_put_alumno(client):
             'institucion': str(institucion.id)
         }
         data = json.dumps(data)
-        data = data.encode(data)
+        data = data.encode()
         rv = client.put('/alumnos/'+str(alumno.id), data=data)
         if rv._status_code == 200:
             assert True
