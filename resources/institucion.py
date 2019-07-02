@@ -18,7 +18,6 @@ class InstitucionItem(Resource):
 
 class Instituciones(Resource):
     def get(self):
-        print(Institucion.objects().all().to_json())
         return json.loads(Institucion.objects().all().to_json())
 
 class InstitucionIdentificador(Resource):
