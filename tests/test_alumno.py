@@ -10,7 +10,6 @@ from models.alumno import Alumno
 from models.curso import Curso
 from models.grado import Grado
 from models.institucion import Institucion
-
 @pytest.fixture
 def client():
     db_fd, api.app.config['DATABASE'] = tempfile.mkstemp()
